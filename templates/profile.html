@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <title>Profile</title>
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+</head>
+<body>
+    <div class="app">
+
+        <header>
+            <nav class="navbar">
+                <div class="logo">
+                    <h1>WeightGain</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('market') }}">Market</a></li>
+                    <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                </ul>
+            </nav>
+        </header>
+        <dev class="profile">  
+            <section class="financial-overview">
+                <div class = "hello">
+                    <h2>Hello,</h2>
+                    <h2>{{ current_user.username }} !</h2>
+                </div>
+                <div class = "finance">
+                    <h2>Finance</h2>
+                    <p>Current Balance: 1000 EUR</p>
+                    <p>Last Login: 01.06.2024</p>
+                </div>
+                
+            </section>
+
+            <section class="open-orders">
+                <h2>Open Trades</h2>
+
+                <a href="#">View All</a>
+            </section>
+
+            <section class="last-orders">
+                <h2>Trade History</h2>
+
+                <a href="#">View All</a>
+            </section>
+
+            <section class="quick-access">
+                <h2>Quick Access</h2>
+                <a href="#">Edit Profile</a>
+                <a href="#">My Weight Chart</a>
+                <a href="#">Balance Chart</a>
+                <a href="#">Neue Bestellung aufgeben</a>
+                <a href="#">Neue Bestellung aufgeben</a>
+                <a href="#">Neue Bestellung aufgeben</a>
+                <a href="#">Neue Bestellung aufgeben</a>
+                <a href="{{ url_for('logout') }}">Logout</a>
+            </section>
+        </dev>
+
+        <footer>
+            <p>&copy; 2024 WeightGain. Alle Rechte vorbehalten.</p>
+        </footer>
+
+    </div>
+</body>
+</html>

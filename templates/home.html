@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+</head>
+<body>
+    
+    <div class="app">
+
+        <header>
+            <nav class="navbar">
+                <div class="logo">
+                    <h1>WeightGain</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('market') }}">Market</a></li>
+                    <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+
+            <div class="image-container">
+                <div class="image-box">
+                    <img src="{{ url_for('static', filename='pie-chart.png') }}" alt="Invest diversified">
+                    <div class="text-overlay">Invest diversified</div>
+                </div>
+                <div class="image-box">
+                    <img src="{{ url_for('static', filename='growth.png') }}" alt="Grow your wealth">
+                    <div class="text-overlay">Grow your wealth</div>
+                </div>
+            </div>
+
+        </main>
+        <footer>
+            <p>&copy; 2024 WeightGain. Alle Rechte vorbehalten.</p>
+        </footer>
+        
+    </div>
+
+    
+
+    
+</body>
+</html>

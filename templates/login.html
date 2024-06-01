@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+</head>
+<body>
+    
+    <div class="app">
+
+        <header>
+            <nav class="navbar">
+                <div class="logo">
+                    <h1>WeightGain</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('market') }}">Market</a></li>
+                    <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class = "loginlogout">
+            <form method="POST" action="{{ url_for('login') }}">
+                <h3>Login Here</h3>
+        
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+        
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div id="flash-messages">
+                            {% for category, message in messages %}
+                                <div class= "login-alert">{{ message }}</div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
+                <button type = "submit" value="Login">Log In</button>
+            </form>
+
+            <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a>.</p>
+        </div>
+       
+        <script>
+            // Entfernt die Flash-Nachrichten nach 5 Sekunden (5000 Millisekunden)
+            setTimeout(function() {
+                var flashMessages = document.getElementById('flash-messages');
+                if (flashMessages) {
+                    flashMessages.style.display = 'none';
+                }
+            }, 1000);
+        </script>
+        
+        <footer>
+            <p>&copy; 2024 WeightGain. Alle Rechte vorbehalten.</p>
+        </footer>
+
+    </div>
+
+    
+
+    
+</body>
+</html>
