@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <title>Market</title>
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment"></script>
+</head>
+<body>
+    <div class="app">
+
+        <header>
+            <nav class="navbar">
+                <div class="logo">
+                    <h1>WeightGain</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('market') }}">Market</a></li>
+                    <li><a href="{{ url_for('profile') }}">Profile</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            <div class = "weight_profile">
+                <section class="weight-form">
+                    <h2>Add new Weight Entry</h2>
+                    <form action="{{ url_for('weight_data') }}" method="POST">
+                        <div class="form-group">
+                            <label for="weight">Weight</label>
+                            <input type="number" step="0.1" id="weight" name="weight" required>
+                        </div>
+                        <button type="submit">Add</button>
+                    </form>
+                </section>
+
+                <section class="weight-chart">
+                    <h2>Chart</h2>
+                    <canvas id="weightChart"></canvas>
+                </section>
+            </div>
+
+            <p>{{ current_weight }}</p>
+
+        </main>
+
+
+        
+
+        <footer>
+            <p>&copy; 2024 WeightGain. Alle Rechte vorbehalten.</p>
+        </footer>
+        
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('{{ url_for("weight_dataGraph") }}')
+                .then(response => response.json())
+                .then(data => {
+                    const dates = data.map(entry => new Date(entry.date)); // Umwandlung in JavaScript-Datumsobjekte
+                    const weights = data.map(entry => entry.weight);
+    
+                    const ctx = document.getElementById('weightChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: dates,
+                            datasets: [{
+                                label: 'Gewicht (kg)',
+                                data: weights,
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                fill: true,
+                                tension: 0.1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                x: {
+                                    type: 'time',
+                                    time: {
+                                        unit: 'day',
+                                        tooltipFormat: 'YYYY-MM-DD' // Format für Tooltip-Anzeige
+                                    }
+                                },
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+                });
+        });
+    </script>
+    
+    
+</body>
+</html>
