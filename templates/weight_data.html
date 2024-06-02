@@ -91,7 +91,9 @@
                                     }
                                 },
                                 y: {
-                                    beginAtZero: true
+                                    suggestedMin: Math.min(...weights) - 5, // Empfohlenes Minimum, 5 Einheiten unter dem kleinsten Gewicht
+                                    suggestedMax: Math.max(...weights) + 5, // Empfohlenes Maximum, 5 Einheiten über dem größten Gewicht
+                                    beginAtZero: false // Skala beginnt nicht bei 0
                                 }
                             }
                         }
